@@ -126,21 +126,22 @@
 
 .commitInfoContainer {
 	border-bottom: 1px solid;
-	/*margin: 2px;*/
-	/*outline: 1px solid #02ADD0;*/
-	padding-left: 4px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	/*width: 100%;*/
 	border-color: #dadada;
 	color: #444;
     background-color: #f0f7f9;
 	-webkit-box-sizing: initial !important;
+	display: table;
 	box-sizing: initial !important;
+	width: 100%;
+}
+
+.commitInfoContainer div:last-child {
+	width: 100%;
 }
 
 .commitInfoMessagelink:hover {
 	color: #F58B0F !important;
+	display: table-cell;
 }
 
 .commitInfoMessagelink {
@@ -172,23 +173,47 @@
 	font-weight: bold;
 }
 
+.commitInfoAvatarContainer {
+	display: table-cell;
+	margin: 4px;
+	width: 41px;
+}
+
 .commitInfoAvatar {
-	float: left;
-	position: relative;
 	height: 32px;
-	vertical-align: text-top;
 	width: 32px;
+	vertical-align: top;
+	margin-left: 4px;
 	border: 1px solid lightgrey;
-	padding: 2px;
-	margin-top: -1px;
-	margin-left: 2px;
-	margin-right: 8px;
-	box-sizing: initial !important;
 }
 
 .commitInfoMessageContainer {
 	position: relative;
 	white-space: normal;
+	margin: 4px;
+}
+
+.incomingChangesMessageContainer {
+	color: #798891;
+	
+	padding-right: 4px;
+	font-style: italic;
+	
+	text-align: right;
+	
+	display: table-cell;
+}
+
+.incomingChangesMessageContainer a {
+	color: #70BDCE;
+}
+
+.incomingChangesMessageContainer a:hover {
+	color: #F58B0F;
+}
+
+.incomingChangesMessageContainer .textContainer {
+	padding-bottom: 4px;
 }
 
 .dropdownMenu > li {

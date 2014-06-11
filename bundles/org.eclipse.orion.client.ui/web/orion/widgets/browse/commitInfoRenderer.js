@@ -141,6 +141,7 @@ define([
 			label = "Last " + label;
 			if(showAvatar) {
 				var avatarContainer = document.createElement("div");
+				avatarContainer.classList.add("commitInfoAvatarContainer");
 				var avatarImage = new Image();//document.createElement("image");
 				if(this._commitInfo.AvatarURL) {
 					avatarImage.src = this._commitInfo.AvatarURL;
@@ -188,6 +189,43 @@ define([
 			messageContainer.appendChild(messageTextContainer);
 
 			this._parentDomNode.appendChild(messageContainer);
+			
+			if (this._commitInfo.IncomingChanges && this._commitInfo.IncomingChanges.changes.length) {
+				var animContainer = document.createElement("div");				
+				animContainer.classList.add("incomingChangesMessageContainer");
+				
+				// Add the message indicating there are outgoing changes. 
+				var textContainer = document.createElement("div");				
+				textContainer.classList.add("textContainer");
+				var wsAndCount = this._commitInfo.IncomingChanges.changes[0];
+
+				var txt = document.createDocumentFragment();
+				txt.textContent = "You have ${0} for this stream";
+				
+				var countNode = document.createTextNode(
+						wsAndCount.outgoingChangeCount == 1 ? "an outgoing change set" : "outgoing change sets"
+				);
+				
+				lib.processDOMNodes(txt, [countNode]);
+				textContainer.appendChild(txt);
+				animContainer.appendChild(textContainer);
+
+				// Add a message telling the user they should deliver
+				var wrapper = document.createElement("div");
+				var deliverMsg = document.createElement("a");
+				if (wsAndCount.outgoingChangeCount == 1) {
+					deliverMsg.textContent = "Deliver it now";
+				}
+				else {
+					deliverMsg.textContent = "Deliver them now";
+				}
+					
+				wrapper.appendChild(deliverMsg);
+				animContainer.appendChild(wrapper);
+				
+				
+				this._parentDomNode.appendChild(animContainer);
+			}
 		}
 	});
 
